@@ -4,11 +4,11 @@ FROM node:18
 # Create app directory
 WORKDIR /usr/src/app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# Copy package.json and package-lock.json first for caching
 COPY package*.json ./
 
-RUN npm install --production  # Use --production to install only dependencies
+# Install both dependencies and devDependencies to access `tsc` for building TypeScript
+RUN npm install
 
 # Bundle app source
 COPY . .
