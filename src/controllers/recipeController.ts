@@ -5,7 +5,7 @@ class RecipeController {
     async createRecipe(req: Request, res: Response) {
         const { title, making_time, serves, ingredients, cost } = req.body;
         if (!title || !making_time || !serves || !ingredients || !cost) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'Recipe creation failed!',
                 required: 'title, making_time, serves, ingredients, cost',
             });
@@ -20,10 +20,10 @@ class RecipeController {
             });
             return res.status(200).json({
                 message: 'Recipe successfully created!',
-                recipe,
+                recipe: [recipe],
             });
         } catch (error) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'Recipe creation failed!',
                 required: 'title, making_time, serves, ingredients, cost',
             });
@@ -39,7 +39,10 @@ class RecipeController {
         const id = parseInt(req.params.id, 10);
         const recipe = await RecipeService.getRecipeById(id);
         if (recipe) {
-            return res.status(200).json({ recipe: [recipe] });
+            return res.status(200).json({
+                message: 'Recipe details by id',
+                recipe: [recipe],
+            });
         }
         return res.status(404).json({ message: 'No recipe found' });
     }
@@ -51,7 +54,7 @@ class RecipeController {
         if (updatedRecipe) {
             return res.status(200).json({
                 message: 'Recipe successfully updated!',
-                recipe: updatedRecipe,
+                recipe: [updatedRecipe],
             });
         }
         return res.status(404).json({ message: 'No recipe found' });
