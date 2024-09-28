@@ -11,6 +11,6 @@ export const config = {
         dialect: 'mysql',
     },
     server: {
-        port: process.env.PORT || 3000,
+        port: process.env.DB_PORT,
     },
 };

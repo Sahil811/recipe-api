@@ -1,8 +1,21 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize, Dialect } from 'sequelize';
+import { config } from '../config';
 
-const db = new Sequelize('your_database', 'your_username', 'your_password', {
-    host: 'localhost',
-    dialect: 'mysql',
+const dbHost = config.database.host || '';
+const dbUser = config.database.username || '';
+const dbPassword = config.database.password || '';
+const dbName = config.database.database || '';
+const dbDialect: Dialect = config.database.dialect as Dialect;
+
+if (!dbHost || !dbUser || !dbPassword || !dbName || !dbDialect) {
+    throw new Error(
+        'Database connection details are not defined. Please check your .env file.'
+    );
+}
+
+const db = new Sequelize(dbName, dbUser, dbPassword, {
+    host: dbHost,
+    dialect: dbDialect,
 });
 
 const testConnection = async () => {
