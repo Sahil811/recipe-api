@@ -1,0 +1,29 @@
+{
+    "name": "recipe-api",
+    "version": "1.0.0",
+    "description": "A RESTful API for managing recipes.",
+    "main": "dist/app.js",
+    "scripts": {
+        "start": "node dist/app.js",
+        "dev": "ts-node src/app.ts",
+        "build": "tsc",
+        "lint": "eslint . --ext .ts"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "express": "^4.17.1",
+        "mysql2": "^2.3.3",
+        "sequelize": "^6.6.2",
+        "sequelize-typescript": "^2.1.0"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/node": "^16.18.112",
+        "eslint": "^7.32.0",
+        "prettier": "^3.3.3",
+        "ts-node": "^10.4.0",
+        "typescript": "^4.9.5"
+    },
+    "author": "Your Name",
+    "license": "MIT"
+}
